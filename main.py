@@ -11,7 +11,7 @@ with st.sidebar:
     polygon_api_key = st.text_input("Polygon API Key", type="password")
 	# Authenticate with the Polygon API
     client = RESTClient(polygon_api_key)
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
 
  #Stock details
 if col1.button("Get Details"):
@@ -65,3 +65,16 @@ if col3.button("Get Historical"):
     
         except Exception as e:
             st.exception(f"Exception: {e}") 
+
+# /v1/related-companies/{ticker}
+ #Stock details
+if col4.button("Related Companies"):
+ if not polygon_api_key.strip() or not symbol.strip():
+        st.error("Please add your Polygon API Key on the left <--")
+else:
+    try:
+        details = client.get_related_companies(symbol)
+        st.success(f"Ticker: {details.ticker}\\n\\n"
+                f"Related Companies: {details.results}\\n\\n")
+    except Exception as e:
+        st.exception(f"Exception: {e}") 
