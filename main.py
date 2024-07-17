@@ -9,8 +9,6 @@ with st.sidebar:
     #Get your Polygon API key from the dashboard. 
     #In a real app you want to store this as a secret in your .env
     polygon_api_key = st.text_input("Polygon API Key", type="password")
-
-		# Authenticate with the Polygon API
-		client = RESTClient(polygon_api_key)
-
-		col1, col2, col3 = st.columns(3)
+	# Authenticate with the Polygon API
+    client = RESTClient(polygon_api_key)
+    col1, col2, col3 = st.columns(3)
