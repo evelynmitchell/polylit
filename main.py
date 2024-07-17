@@ -25,3 +25,20 @@ else:
                 f"Market Cap: {details.market_cap}")
     except Exception as e:
         st.exception(f"Exception: {e}") 
+
+#Current bid info
+if col2.button("Get Quote"):
+    if not polygon_api_key.strip() or not symbol.strip():
+        st.error("Please add your Polygon API Key on the left <--")
+    else:
+        try:
+            aggs = client.get_previous_close_agg(symbol)
+            for agg in aggs:
+                st.success(f"Ticker: {agg.ticker}\\n\\n"
+                    f"Close: {agg.close}\\n\\n"
+                    f"High: {agg.high}\\n\\n"
+                    f"Low: {agg.low}\\n\\n"
+                    f"Open: {agg.open}\\n\\n"
+                    f"Volume: {agg.volume}")
+        except Exception as e:
+            st.exception(f"Exception: {e}")
