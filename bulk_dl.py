@@ -28,7 +28,7 @@ Note: This script is designed to be compatible with a data reader script, such a
 """
 
 # Set up logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s", filename='bulk_dl.log')
 
 
 def signal_handler(sig, frame):
@@ -54,8 +54,6 @@ def get_aggs_for_symbol_and_date(symbol_date_pair):
         limit=50000,
     ):
         aggs.append(a)
-
-    print(len(aggs))
 
     filename = f"{symbol}-aggs-{date}.pickle.lz4"
     with open(filename, "wb") as file:
